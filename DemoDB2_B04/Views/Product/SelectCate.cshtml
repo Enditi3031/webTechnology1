@@ -1,0 +1,3 @@
+﻿@model DemoDB2_B04.Models.Category
+@Html.DropDownListFor(model => model.IDCate,
+   new SelectList(Model.ListCate.OrderBy(model => model.NameCate), "IDCate", "NameCate"), "--Selectcate--")
