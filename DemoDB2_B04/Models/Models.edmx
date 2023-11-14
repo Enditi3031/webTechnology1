@@ -40,6 +40,9 @@
           <Property Name="IDOrder" Type="int" />
           <Property Name="Quantity" Type="int" />
           <Property Name="UnitPrice" Type="float" />
+          <Property Name="NamePro" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ImagePro" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="OrderPro">
           <Key>
@@ -95,18 +98,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderPro__IDCus__1920BF5C">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="OrderPro" Type="Self.OrderPro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="IDCus" />
-            </Principal>
-            <Dependent Role="OrderPro">
-              <PropertyRef Name="IDCus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Pro_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
@@ -134,10 +125,6 @@
           <AssociationSet Name="FK__OrderDeta__IDPro__1BFD2C07" Association="Self.FK__OrderDeta__IDPro__1BFD2C07">
             <End Role="Products" EntitySet="Products" />
             <End Role="OrderDetail" EntitySet="OrderDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK__OrderPro__IDCus__1920BF5C" Association="Self.FK__OrderPro__IDCus__1920BF5C">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="OrderPro" EntitySet="OrderPro" />
           </AssociationSet>
           <AssociationSet Name="FK_Pro_Category" Association="Self.FK_Pro_Category">
             <End Role="Category" EntitySet="Category" />
@@ -175,7 +162,6 @@
           <Property Name="NameCus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PhoneCus" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="EmailCus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="OrderProes" Relationship="Self.FK__OrderPro__IDCus__1920BF5C" FromRole="Customer" ToRole="OrderPro" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -186,6 +172,9 @@
           <Property Name="IDOrder" Type="Int32" />
           <Property Name="Quantity" Type="Int32" />
           <Property Name="UnitPrice" Type="Double" />
+          <Property Name="NamePro" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ImagePro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="OrderPro" Relationship="Self.FK__OrderDeta__IDOrd__1CF15040" FromRole="OrderDetail" ToRole="OrderPro" />
           <NavigationProperty Name="Product" Relationship="Self.FK__OrderDeta__IDPro__1BFD2C07" FromRole="OrderDetail" ToRole="Products" />
         </EntityType>
@@ -197,7 +186,6 @@
           <Property Name="DateOrder" Type="DateTime" Precision="0" />
           <Property Name="IDCus" Type="Int32" />
           <Property Name="AddressDeliverry" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK__OrderPro__IDCus__1920BF5C" FromRole="OrderPro" ToRole="Customer" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__IDOrd__1CF15040" FromRole="OrderPro" ToRole="OrderDetail" />
         </EntityType>
         <EntityType Name="Product">
@@ -235,18 +223,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderPro__IDCus__1920BF5C">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="OrderPro" Type="Self.OrderPro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="IDCus" />
-            </Principal>
-            <Dependent Role="OrderPro">
-              <PropertyRef Name="IDCus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__OrderDeta__IDOrd__1CF15040">
           <End Role="OrderPro" Type="Self.OrderPro" Multiplicity="0..1" />
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
@@ -271,7 +247,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DBSportStoreEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DBSportStoreEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AdminUsers" EntityType="Self.AdminUser" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
@@ -282,10 +258,6 @@
           <AssociationSet Name="FK_Pro_Category" Association="Self.FK_Pro_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Products" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK__OrderPro__IDCus__1920BF5C" Association="Self.FK__OrderPro__IDCus__1920BF5C">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="OrderPro" EntitySet="OrderProes" />
           </AssociationSet>
           <AssociationSet Name="FK__OrderDeta__IDOrd__1CF15040" Association="Self.FK__OrderDeta__IDOrd__1CF15040">
             <End Role="OrderPro" EntitySet="OrderProes" />
@@ -301,7 +273,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DBSportStoreModelStoreContainer" CdmEntityContainer="DBSportStoreEntities">
+        <EntityContainerMapping StorageEntityContainer="DBSportStoreModelStoreContainer" CdmEntityContainer="DBSportStoreEntities2">
           <EntitySetMapping Name="AdminUsers">
             <EntityTypeMapping TypeName="DBSportStoreModel.AdminUser">
               <MappingFragment StoreEntitySet="AdminUser">
@@ -339,6 +311,9 @@
                 <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="NamePro" ColumnName="NamePro" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ImagePro" ColumnName="ImagePro" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

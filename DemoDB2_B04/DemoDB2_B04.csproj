@@ -138,41 +138,41 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminUser.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
+      <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Category.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
+      <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
+      <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DBEntities.Context.cs">
+    <Compile Include="Models\Models.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBEntities.Context.tt</DependentUpon>
+      <DependentUpon>Models.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DBEntities.cs">
+    <Compile Include="Models\Models.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBEntities.tt</DependentUpon>
+      <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DBEntities.Designer.cs">
+    <Compile Include="Models\Models.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBEntities.edmx</DependentUpon>
+      <DependentUpon>Models.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderDetail.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
+      <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderPro.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
+      <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
+      <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
+      <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -181,44 +181,42 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\1.jpg" />
     <Content Include="Content\images\acer.jpg" />
     <Content Include="Content\images\asus.png" />
     <Content Include="Content\images\asus1.jpg" />
     <Content Include="Content\images\Cart.jpg" />
-    <Content Include="Content\images\cho.jpg" />
-    <Content Include="Content\images\chu.png" />
-    <Content Include="Content\images\co.jpg" />
     <Content Include="Content\images\dell.jpg" />
-    <Content Include="Content\images\ech.jpg" />
+    <Content Include="Content\images\giohang.png" />
     <Content Include="Content\images\hp.jpg" />
-    <Content Include="Content\images\hsnd.png" />
     <Content Include="Content\images\leno.jpg" />
+    <Content Include="Content\images\logo T.png" />
+    <Content Include="Content\images\logo-CN1.png" />
     <Content Include="Content\images\mac.jpg" />
-    <Content Include="Content\images\mattroi.png" />
+    <Content Include="Content\images\macc.png" />
     <Content Include="Content\images\msi.png" />
-    <Content Include="Content\images\shin.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\DBEntities.Context.tt">
+    <Content Include="Models\Models.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBEntities.edmx</DependentUpon>
-      <LastGenOutput>DBEntities.Context.cs</LastGenOutput>
+      <DependentUpon>Models.edmx</DependentUpon>
+      <LastGenOutput>Models.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DBEntities.tt">
+    <Content Include="Models\Models.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBEntities.edmx</DependentUpon>
-      <LastGenOutput>DBEntities.cs</LastGenOutput>
+      <DependentUpon>Models.edmx</DependentUpon>
+      <LastGenOutput>Models.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\DBEntities.edmx">
+    <EntityDeploy Include="Models\Models.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DBEntities.Designer.cs</LastGenOutput>
+      <LastGenOutput>Models.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DBEntities.edmx.diagram">
-      <DependentUpon>DBEntities.edmx</DependentUpon>
+    <Content Include="Models\Models.edmx.diagram">
+      <DependentUpon>Models.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -261,7 +259,12 @@
     <Content Include="Views\ShoppingCart\EmptyCart.cshtml" />
     <Content Include="Views\Product\Delete.cshtml" />
     <Content Include="Views\Product\Edit.cshtml" />
-    <Content Include="Views\Product\admin.cshtml" />
+    <Content Include="Views\Product\Admin.cshtml" />
+    <Content Include="Views\ShoppingCart\CheckOut_Success.cshtml" />
+    <Content Include="Views\Product\Index2.cshtml" />
+    <Content Include="Views\ShoppingCart\chitiet.cshtml" />
+    <Content Include="Views\ShoppingCart\DanhsachDH.cshtml" />
+    <Content Include="Views\Product\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

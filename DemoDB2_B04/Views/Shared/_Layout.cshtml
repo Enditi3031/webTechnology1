@@ -7,7 +7,11 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <script src="~/Scripts/script.js"></script>
+    <link href="~/Content/bootstrap5/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style>
+
         .navbar {
             list-style-type: none;
             margin: 0;
@@ -17,11 +21,104 @@
         .navbar-item {
             display: inline-block;
             margin-right: 10px;
+            margin-top: 7px;
+            padding: 5px;
         }
+
+        .navbar-header {
+            padding: 0px 20px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .navbar-inverse {
+            height: 40px;
+        }
+
+            .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+                background: #182a3d;
+            }
+
+            .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+                border-color: #182a3d;
+            }
+
+
+        body li a {
+            color: black;
+        }
+
+        .navbar-inverse .navbar-brand {
+            color: white;
+            margin-top: 15px;
+            padding: 0px 20px;
+            text-decoration: none
+        }
+
+        .navbar-inverse .navbar-nav li a {
+            color: white;
+        }
+
+        .table th {
+            font-size: 18px;
+        }
+
+        body {
+            background: #f3f3f3;
+        }
+
+        .footer1 {
+            background: white;
+            color: black;
+            padding-top: 20px;
+            border-top: 1px solid black;
+        }
+
+        footer h3 {
+            font-family: Montserrat, sans-serif;
+            font-weight: 600;
+            padding-bottom: 10px;
+        }
+
+        footer p {
+            font-family: Montserrat sans-serif;
+            font-size: 18px;
+            font-weight: normal;
+        }
+
+        footer li {
+            float: none;
+            list-style: none;
+            display: inline;
+        }
+
+            footer li a {
+                color: black;
+                display: inline-block;
+                padding: 12px;
+                border: 2px solid;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                margin: 0 9px;
+                transition: 0.4s;
+                text-decoration: none;
+            }
+
+        footer .footer1 ul {
+            display: inline;
+        }
+
+        footer ul li a:hover {
+            background: #000000;
+            color: white;
+            text-decoration: none;
+        }
+
     </style>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #ffd400; border-color: white;">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
@@ -29,45 +126,82 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Thiện Store", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <div style="display: flex; align-items: center; padding-top: 8px;  ">
+                    <a style="font-size: 25px; padding: 0px 20px; color: black; text-decoration: none;" href="@Url.Action("Index","Product")">Technology</a>
+                </div>
+                @*<a  href="" class="navbar-brand"></a>
+                    @Html.ActionLink("Technology", "Index", "Product", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse" style="background:none;">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (Session["ID"] == "admin")
+                    {
+                        <li style=" margin-top: 15px; "><a style="padding: 0px 20px; color: black; text-decoration: none;" href="@Url.Action("Create","Product")">Thêm Sản Phẩm</a></li>
+                        <li style=" margin-top: 15px; "><a style="padding: 0px 20px; color: black; text-decoration: none;" href="@Url.Action("Index2","Product")">Chỉnh Sửa Sản Phẩm</a></li>
+                        <li style=" margin-top: 15px; "><a style="padding: 0px 20px; color: black; text-decoration: none;" href="@Url.Action("Index","Categories")">Chỉnh Sửa Danh Sách</a></li>
+                        <li style=" margin-top: 15px; "><a style="padding: 0px 20px; color: black; text-decoration: none;" href="@Url.Action("DanhsachDH","ShoppingCart")">Lịch Sử Đặt Hàng</a></li>
+
+                    }
                 </ul>
-                <ul class="nav navbar-var navbar-right ">
-                    <ul class="navbar">
+                <ul class="nav navbar-var navbar-right">
+                    <ul class="navbar" style="display: flex; justify-content: space-between; align-items: center;">
                         <li class="navbar-item">
                             <span>
                                 <a href="/ShoppingCart/ShowCart">
-                                    <img src="@Url.Content("~/Content/images/Cart.jpg")" style="height: 30px; width:30px;margin-top: 10px" />
+                                    <img src="@Url.Content("~/Content/images/giohang.png")" style="height: 30px; width: 30px; margin-top: 0px;   " />
 
                                 </a>
                             </span>
                             @Html.Action("BagCart", "ShoppingCart")
                         </li>
-
-
                         <li class="navbar-item"><a href="/LoginUser/RegisterUser"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
                         <li class="navbar-item"><a href="/LoginUser/Index"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
-                        <li class="navbar-item"><a href="@Url.Action("LoOutUser","LoginUser")">LogOut</a> </li>
+                        <li class="navbar-item"><a href="@Url.Action("LogOutUser","LoginUser")">LogOut</a> </li>
+
                     </ul>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="container body-content">
+
+    <div class="container body-content" style="margin-bottom: 200px; ">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Footer</p>
-        </footer>
+        
     </div>
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
+<footer>
+    <div class="footer1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
+                    <h3>Địa chỉ </h3>
+                    <p> Số 828 Sư Vạn Hạnh, phường 13, <br /> quận 10, thành phố Hồ Chí Minh.</p>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
+                    <h3>Thông tin liên hệ </h3>
+                    <ul>
+                        <li><p style="margin-right: 0px;">Hotline: 0348558529</p></li>
+                        <li><p>Email: thiennguyen243031@gmail.com</p></li>
+                        <li><a href="https://www.facebook.com/profile.php?id=100046601709739&sk=about_overview" class="fa fa-facebook"></a></li>
+                        <li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Finstagram.com%2Fngoc.ope%3Figshid%3DMTN4cGFta3dxZXI4aQ%253D%253D%26utm_source%3Dqr%26fbclid%3DIwAR1fCedezQxIi0dYTTu3nzlVBpq70G4Ev4LeosLbLRQzmeJ3EXDpb_8txBo&h=AT26oCVKsYI1hFsKTrGqKctpJYmyOlQq4cCgQt2NdRZWHC86JzuuJBOCAmSTdI8tK5ujNDIClJQNN1pJYnFYJoNbdv9jUSQze85bG1XhM5Wp64FI6iRyUeqMh1qMEgfwgWa9xQ" class="fa fa-instagram"></a></li>
+                        <li><a href="" class="fa fa-envelope"></a></li>
+                        <li><a href="" class="fa fa-twitter"></a></li>
+                        <li><a href="" class="fa fa-phone"></a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
+                    <h3>Công ty CNHH NoName </h3>
+                    <p>Chuyên cung cấp và phân phối các dòng Laptop mới nhất đến tay người dùng.<br /> Uy tín tạo nên thương hiệu.  </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 </html>

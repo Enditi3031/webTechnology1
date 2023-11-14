@@ -1,26 +1,91 @@
-﻿
-@model IEnumerable<DemoDB2_B04.Models.Product>
+﻿@model IEnumerable<DemoDB2_B04.Models.Product>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    
 }
 
-<h2>DANH SÁCH SẢN PHẨM</h2>
-<div class="container">
-    <div class="row">
-        @foreach (var pro in Model)
-        {
-            <div class="col-sm-12 col-sm-6 col-md-4 col-lg-3">
-                <div class="card-pro">
-                    <p>@Html.DisplayFor(model => pro.ProductID)</p>
-                    <img src="@Url.Content(pro.ImagePro)" height="150" width="150" />
-                    <p>@Html.DisplayFor(model => pro.NamePro)</p>
-                    <p>@Html.DisplayFor(model => pro.Price)</p>
-                    <a href="/ShoppingCart/AddToCart/@pro.ProductID" class="btn btn-default">Buy</a>
+@using (Html.BeginForm("Index", "Product", FormMethod.Get))
+{
+
+    <div >
+        <div style="display: flex; padding-top: 90px; padding-bottom: 50px; justify-content: space-between; ">
+            <div style="width: 200px; padding-top: 10px; margin-right: 50px; box-shadow: 2px 2px #c7c4c4; border-radius: 20px; background-color: #f7f7f7;">
+                <ul>
+                    <li style="font-size: 20px; font-weight:500; padding-bottom: 5px;">Asus</li>
+                    <li style="font-size: 20px; font-weight:500; padding-bottom: 5px;">Acer</li>
+                    <li style="font-size: 20px; font-weight:500; padding-bottom: 5px;">Dell</li>
+                    <li style="font-size: 20px; font-weight:500; padding-bottom: 5px;">Hp</li>
+                    <li style="font-size: 20px; font-weight:500; padding-bottom: 5px;">Msi</li>
+                    <li style="font-size: 20px; font-weight:500; padding-bottom: 5px;">LG</li>
+                    <li style="font-size: 20px; font-weight:500; padding-bottom: 5px;">Macbook</li>
+                    <li style="font-size: 20px; font-weight:500; padding-bottom: 5px;">Lenovo</li>
+                </ul>
+            </div>
+            <div style="display: flex;">
+                <div>
+                    <img src="https://phucanhcdn.com/media/news/7908_banner_hoan_tien_mat_khi_mua_lg_gram_2020_06.jpg" style=" width: 700px; height: 330px;" />
+                </div>
+                <div style="margin-left: 30px;">
+
+                    <div><img src="https://cdn.tgdd.vn/Files/2023/01/05/1500996/xa-kho-giam-soc-laptop-da-su-dung-tiet-kiem-den.jpg" style=" height: 100px; margin-bottom: 15px; " /></div>
+                    <div><img src="https://cdn.tgdd.vn//News/Thumb/1510635/Lenovo-12-1200x628.jpg" style=" height: 100px; margin-bottom: 15px;" /></div>
+                    <div><img src="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2022/03/1200x628px.jpg" style=" height: 100px; " /></div>
 
                 </div>
             </div>
-        }
+        </div>
     </div>
-</div>
+    <h2 style="padding: 0px 0px;">Danh sách sản phẩm</h2>
 
+    <tr>
+        <div style="display: flex; margin-left: 500px; padding: 20px 0px; ">
+            <input name="name" type="text" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 20px; width: 500px; ">
+
+        <td><input type="submit" value="Tìm Kiếm" style=" padding: 5px 30px; border-radius: 10px; border: 1px; background-color: #ff255b;" /></td>
+        </div>
+    </tr>
+
+    <table class="table" style="margin-bottom: 50px;">
+
+        <div class="container">
+            <div class="row" style=" display: flex; flex-wrap: wrap; margin-left: 110px; ">
+                @foreach (var pro in Model)
+                {
+                    <div class="col-sm-12 col-sm-6 col-md-4 col-lg-3" style="width: 200px; margin-bottom: 30px; padding: 0px; margin-right: 50px; padding-bottom: 10px; border-radius: 20px; box-shadow: 0 1px 2px 0 rgba(60,64,67,.1), 0 2px 6px 2px rgba(60,64,67,.15); ">
+                        <div class="card-pro">
+                            <a href="@Url.Action("Detail","Product", new {id = pro.ProductID})">
+                                <img src="@Url.Content(pro.ImagePro)" height="150" width="150" style="border-radius: 16px; width: 200px;" />
+                            </a>
+                            <p style="padding: 5px 20px">@Html.DisplayFor(model => pro.NamePro)</p>
+                            <p class="price" style="padding: 5px 20px; color: red; font-weight: 700;">@Html.DisplayFor(model => pro.Price) </p>
+                            <a style="padding: 5px 20px; text-decoration: none; color: red; " href="@Url.Action("AddToCart","ShoppingCart", new {id = pro.ProductID})">Buy</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </table>
+
+}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var priceElements = document.querySelectorAll(".price");
+
+            priceElements.forEach(function (element) {
+                var priceValue = element.textContent;
+                var formattedPrice = formatPrice(priceValue);
+                element.textContent = formattedPrice;
+            });
+
+            function formatPrice(price) {
+                // Chuyển đổi thành số nguyên
+                var integerPart = parseInt(price);
+                // Thêm dấu phẩy ngăn cách hàng ngàn
+                var formattedPrice = integerPart.toLocaleString("vi-VN");
+                // Thêm đơn vị tiền tệ
+                formattedPrice += " đ";
+                return formattedPrice;
+            }
+        });
+    </script>

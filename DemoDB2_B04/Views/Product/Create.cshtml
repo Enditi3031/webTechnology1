@@ -8,11 +8,14 @@
 <h2>THÊM MỚI SẢN PHẨM</h2>
 @using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <table class="table-bordered">
+    <table class="table-bordered" style="margin-bottom: 475px;">
         <tr>
-            <td>@Html.LabelFor(model => model.NamePro) </td>
-            <td>@Html.EditorFor(model => model.NamePro) </td>
-        </tr>
+            <div style="display: flex;">
+                <p>Tên sản phẩm</p>
+                <input class="text-box single-line" id="NamePro" name="NamePro" type="text" value="" />
+        
+        </div>
+
         <tr>
             <td>@Html.LabelFor(model => model.Price) </td>
             <td>@Html.EditorFor(model => model.Price) </td>
@@ -33,11 +36,15 @@
         </tr>
         <tr>
             <td colspan="2">
-                <input type="file" name="UploadImage" onchange="ChangeImage(this, document.getElementById('previewImge'))" />
+                <input type="file" name="UploadImages" onchange="ChangeImage(this, document.getElementById('previewImg'))" />
                 <input type="submit" value="Tạo mới" />
             </td>
         </tr>
 
     </table>
 }
-
+<style>
+    .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+        border:none;
+    }
+</style>

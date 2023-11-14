@@ -4,7 +4,9 @@
     ViewBag.Title = "ShowCart";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<style>
+    
+</style>
 <h2>Giỏ Hàng</h2>
 <a href=" @Url.Action("Index","Product")">Tiếp tục mua hàng</a>
 @if (Model != null)
@@ -33,11 +35,12 @@
                         @using (Html.BeginForm("Update_Cart_Quantity", "ShoppingCart"))
                         {
                             <input type="hidden" value="@item._product.ProductID" name="idPro" />
-                            <input type="number" value="@item._quantity" name="cartQuantity" />
+                            <input type="number" value="@item._quantity" name="cartQuantity" required min="1" />
                             <input type="submit" value="Update" />
                         }
                     </td>
-                    <td>@total</td>
+                    <td>@total.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</td>
+
                     <td>
                         <a href="/ShoppingCart/RemoveCart/@item._product.ProductID">Xóa</a>
                     </td>
@@ -47,13 +50,21 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="6" style="text-align:right ">Tổng Tiền: @Model.Total_money()</td>
+                <td colspan="6" style="text-align:right ">Tổng Tiền: @Model.Total_money().ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</td>
+
+                <td>
+                    <div style="margin-top: 50px;">
+                        <a href="@Url.Action("DatHang","ShoppingCart")" style="color: black; font-size: 20px; border: 2px solid black; border-radius: 8px; padding: 5px; text-decoration: none;" onmouseover=" this.style.color='red' " onmouseout=" this.style.color='black'">Đặt Hàng</a>
+                    </div>
+                </td>
+
             </tr>
+
         </tfoot>
     </table>
 }
 else
-            {
-                @Html.Partial("EmptyCart")
-            }
+{
+    @Html.Partial("EmptyCart")
+}
 

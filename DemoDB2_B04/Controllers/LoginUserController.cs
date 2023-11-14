@@ -9,19 +9,19 @@ namespace DemoDB2_B04.Controllers
 {
     public class LoginUserController : Controller
     {
-        DBSportStoreEntities database = new DBSportStoreEntities();
+        DBSportStoreEntities2 database = new DBSportStoreEntities2();
         // GET: LoginUser
         public ActionResult Index()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult LoginAcount(AdminUser _user)
+        public ActionResult LoginAcount(AdminUser _user)//hao
         {
             if("admin@gmail.com" == _user.NameUser && "admin123456" == _user.PasswordUser)
             {
                 database.Configuration.ValidateOnSaveEnabled = false;
-                Session["ID"] = _user.ID;
+                Session["ID"] = "admin";
                 Session["PasswordUser"] = _user.PasswordUser;
                 return RedirectToAction("admin", "Product");
             }
@@ -47,6 +47,8 @@ namespace DemoDB2_B04.Controllers
         [HttpPost]
         public ActionResult RegisterUser(AdminUser _user)
         {
+            var lastUserId = database.AdminUsers.OrderByDescending(u => u.ID).Select(u => u.ID).FirstOrDefault();
+            _user.ID = lastUserId + 1;
             if (ModelState.IsValid)
             {
                 var check_ID = database.AdminUsers.Where(s => s.NameUser == _user.NameUser).FirstOrDefault();
@@ -67,7 +69,7 @@ namespace DemoDB2_B04.Controllers
         }
         public ActionResult LogOutUser()
         {
-            Session.Abandon();
+            Session.Clear();
             return RedirectToAction("Index", "LoginUser");
         }
     }

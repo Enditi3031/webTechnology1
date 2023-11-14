@@ -10,13 +10,20 @@ namespace DemoDB2_B04.Controllers
 {
     public class ProductController : Controller
     {
-        DBSportStoreEntities database = new DBSportStoreEntities();
+        DBSportStoreEntities2 database = new DBSportStoreEntities2();
         // GET: Product
-        public ActionResult Index()
+        public ActionResult Index(string name)// tiềm kiếm ngoc peo
+        {
+            if (name == null)// khi người dùng không nhập tìm kiếm 
+                return View(database.Products.ToList());// thì trả về list tất cả các sản phẩm của product
+            else
+                return View(database.Products.Where(s => s.NamePro.Contains(name)).ToList());// chức năng tiềm kiếm
+        }
+        public ActionResult Index2()
         {
             return View(database.Products.ToList());
         }
-        public ActionResult admin()
+        public ActionResult Admin()
         {
             return View(database.Products.ToList());
         }
@@ -36,13 +43,13 @@ namespace DemoDB2_B04.Controllers
         {
             try
             {
-                if (pro.UploadImage != null)
+                if (pro.UploadImages != null)
                 {
-                    string filename = Path.GetFileNameWithoutExtension(pro.UploadImage.FileName);
-                    string extent = Path.GetExtension(pro.UploadImage.FileName);
+                    string filename = Path.GetFileNameWithoutExtension(pro.UploadImages.FileName);
+                    string extent = Path.GetExtension(pro.UploadImages.FileName);
                     filename = filename + extent;
                     pro.ImagePro = "~/Content/images/" + filename;
-                    pro.UploadImage.SaveAs(Path.Combine(Server.MapPath("~/Content/images/"), filename));
+                    pro.UploadImages.SaveAs(Path.Combine(Server.MapPath("~/Content/images/"), filename));
                 }
                 database.Products.Add(pro);
                 database.SaveChanges();
@@ -65,7 +72,7 @@ namespace DemoDB2_B04.Controllers
                 product = database.Products.Where(s => s.ProductID == id).FirstOrDefault();
                 database.Products.Remove(product);
                 database.SaveChanges();
-                return RedirectToAction("admin");
+                return RedirectToAction("Admin");
             }
             catch
             {
@@ -74,24 +81,31 @@ namespace DemoDB2_B04.Controllers
         }
         public ActionResult Edit(int id)
         {
-            return View(database.Categories.Where(s => s.Id == id).FirstOrDefault());
+            return View(database.Products.Where(s => s.ProductID == id).FirstOrDefault());
         }
         [HttpPost]
-        public ActionResult Edit(int id, Category cate)
+        public ActionResult Edit(int id, Product cate)
         {
-            if (cate.IDCate == null)
+            if (database.Products.Any(s => s.ProductID == id))
             {
-                TempData["ErrorMessage"] = "Không thể chỉnh sửa sản phẩm với giá trị IDCate là null.";
-                return RedirectToAction("Error");
-            }
-            else
-            {
-                // Tiếp tục xử lý chỉnh sửa
                 database.Entry(cate).State = System.Data.Entity.EntityState.Modified;
                 database.SaveChanges();
                 return RedirectToAction("Index");
             }
+            else
+            {
+                // Xử lý khi không tìm thấy sản phẩm
+                return RedirectToAction("NotFound");
+            }
         }
+        //public ActionResult Edit(int id, Category cate)
+        //{
+        //    // Tiếp tục xử lý chỉnh sửa
+        //    database.Entry(cate).State = System.Data.Entity.EntityState.Modified;
+        //    database.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
+
         public ActionResult Error()
         {
             // Lấy thông báo lỗi từ TempData
@@ -99,6 +113,10 @@ namespace DemoDB2_B04.Controllers
             ViewBag.ErrorMessage = errorMessage;
             return View();
         }
-
+        public ActionResult Detail(int id)
+        {
+           
+            return View(database.Products.Where(s => s.ProductID == id).FirstOrDefault());
+        }
     }
 }

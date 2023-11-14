@@ -10,29 +10,53 @@
         color: red;
     }
 </style>
-<h2>RegisterUser</h2>
-@using (Html.BeginForm("RegisterUser", "LoginUser", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-    if (ViewBag.ErrorRegister != null)
-    {
-        <p>@ViewBag.ErrorRegister</p>
+<body style="display: flex; justify-content: center; align-items: center; background: white; ">
+    <div style="margin-top: 100px;text-align: center; margin-bottom: 300px;">
+        <h2 style=" padding: 30px 0px; font-weight:700">Đăng Ký</h2>
+        @using (Html.BeginForm("RegisterUser", "LoginUser", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            if (ViewBag.ErrorRegister != null)
+            {
+                <p>@ViewBag.ErrorRegister</p>
+            }
+            <div>
+                <tr>
+                    <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
+                        <p style=" margin: 0px;">Tên tài khoản: </p>
+                        <input id="NameUser" name="NameUser" type="text" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 20px; width: 500px; ">
+                    <td>@Html.ValidationMessageFor(model => model.NameUser)</td>
+            </div>
+            </tr>
+
+            <tr>
+                <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
+                    <p style=" margin: 0px;">Nhập địa chỉ: </p>
+                    <input id="RoleUser" name="RoleUser" type="text" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 26px; width: 500px; ">
+                <td>@Html.ValidationMessageFor(model => model.RoleUser)</td>
+        </div>
+        </tr>
+
+        <tr>
+            <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
+                <p style=" margin: 0px;">Nhập mật khẩu: </p>
+                <input id="PasswordUser" name="PasswordUser" type="password" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 11px; width: 500px; ">
+            <td>@Html.ValidationMessageFor(model => model.PasswordUser)</td>
+            @if (ViewBag.ErrorInfo == null)
+            {
+                <p> @ViewBag.ErrorInfo</p>
+            }
+            </div>
+        </tr>
+        <tr>
+            <div style="margin-right: 71px; padding: 20px 0px; margin-bottom: 350px">
+            <td><a href="@Url.Action("Index","LoginUser")"  style="color: red !important; text-decoration: none; font-size: 17px; padding: 6px 20px; border-radius: 10px; border: 1px; margin-right: 20px; background-color: white;color: black; ">Đăng Nhập</a></td>
+            <td><input type="submit" value="Đăng Ký" style="color: red; text-decoration: none; font-size: 17px; padding: 6px 20px; border-radius: 10px; border: 1px; background-color: #0099FF; font-weight: 600; color: white; " /></td>
+            </div>
+        </tr>
+        </div>
     }
-    <p>@Html.LabelFor(model => model.NameUser)</p>
-    <p>@Html.EditorFor(model => model.NameUser)</p>
-    <p>@Html.ValidationMessageFor(model => model.NameUser)</p>
+        <div>
 
-    <p>@Html.LabelFor(model => model.RoleUser)</p>
-    <p>@Html.EditorFor(model => model.RoleUser)</p>
-    <p>@Html.ValidationMessageFor(model => model.RoleUser)</p>
-
-    <p>@Html.LabelFor(model => model.PasswordUser)</p>
-    <p>@Html.PasswordFor(model => model.PasswordUser)</p>
-    <p>@Html.ValidationMessageFor(model => model.PasswordUser)</p>
-
-    <p>@Html.LabelFor(model => model.ConfirmPass)</p>
-    <p>@Html.PasswordFor(Model => Model.ConfirmPass)</p>
-    <p>@Html.ValidationMessageFor(model => model.ConfirmPass)</p>
-    <input type="submit" value="Register" />
-}
+    </body>
 

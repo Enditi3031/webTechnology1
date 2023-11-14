@@ -1,6 +1,12 @@
 ﻿@model DemoDB2_B04.Models.Product
 
-<h3>Are you sure you want to delete this?</h3>
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detail</h2>
+
 <div>
     <h4>Product</h4>
     <hr />
@@ -13,21 +19,6 @@
             @Html.DisplayFor(model => model.NamePro)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DecriptionPro)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DecriptionPro)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Price)
@@ -46,12 +37,5 @@
         </dd>
 
     </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color" style=" margin-bottom: 560px; ">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-        </div>
-    }
 </div>
+

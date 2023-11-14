@@ -14,18 +14,9 @@ namespace DemoDB2_B04.Models
     
     public partial class Customer
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customer()
-        {
-            this.OrderProes = new HashSet<OrderPro>();
-        }
-    
         public int IDCus { get; set; }
         public string NameCus { get; set; }
         public string PhoneCus { get; set; }
         public string EmailCus { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderPro> OrderProes { get; set; }
     }
 }

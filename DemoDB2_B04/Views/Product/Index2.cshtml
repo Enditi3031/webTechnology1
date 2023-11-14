@@ -1,29 +1,25 @@
 ﻿@model IEnumerable<DemoDB2_B04.Models.Product>
 
 @{
-    ViewBag.Title = "Admin";
+    ViewBag.Title = "Index2";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Admin</h2>
+<h2 style="font-weight: 700;">Quản lí sản phẩm</h2>
 
 
-<table class="table" style="margin-bottom: 290px;">
-    <tr>
+<table class="table" style=" margin-bottom: 290px; ">
+    <tr style="background-color: dodgerblue; color: white;">
         <th>
-            @Html.DisplayNameFor(model => model.NamePro)
+            @Html.DisplayName("Tên sản phẩm")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DecriptionPro)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Category)
-        </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayName("Giá")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ImagePro)
+            @Html.DisplayName("Hình ảnh")
         </th>
         <th></th>
     </tr>
@@ -36,17 +32,17 @@
         <td>
             @Html.DisplayFor(modelItem => item.DecriptionPro)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Price)
         </td>
-
         <td>
             <img src="@Url.Content(item.ImagePro)" height="150" width="150" style="border-radius: 16px; width: 200px;" />
         </td>
-
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }) |
+           
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProductID })
+        </td>
     </tr>
 }
 
