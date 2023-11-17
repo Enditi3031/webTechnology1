@@ -19,6 +19,7 @@
                 <th>Hình sản phẩm</th>
                 <th>Giá</th>
                 <th>Số lượng</th>
+                <th>Giảm giá</th>
                 <th>Thành Tiền</th>
                 <th></th>
             </tr>
@@ -26,31 +27,45 @@
         <tbody>
             @foreach (var item in Model.Items)
             {
-                decimal total = item._quantity * (decimal)(item._product?.Price ?? 0);
+                decimal total = item._quantity * (decimal)item._product.Price.Value * (decimal)item._product.giamgia.Value;
+                decimal total2 = item._quantity * (decimal)item._product.Price.Value - (decimal)total;
+                double giamgia = item._product.giamgia.Value * 100;
                 <tr>
                     <td>@Html.DisplayFor(Model => item._product.NamePro)</td>
                     <td><img src="@Url.Content(item._product.ImagePro)" height="50" width="50" /></td>
-                    <td>@Html.DisplayFor(model => item._product.Price)</td>
+                    <td class="price">@Html.DisplayFor(model => item._product.Price)</td>
                     <td>
                         @using (Html.BeginForm("Update_Cart_Quantity", "ShoppingCart"))
                         {
                             <input type="hidden" value="@item._product.ProductID" name="idPro" />
                             <input type="number" value="@item._quantity" name="cartQuantity" required min="1" />
                             <input type="submit" value="Update" />
+
                         }
                     </td>
-                    <td>@total.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</td>
+                    <td style="display:flex;"><p>@giamgia</p><p>%</p></td>
+                    <td>@total2.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</td>
 
                     <td>
                         <a href="/ShoppingCart/RemoveCart/@item._product.ProductID">Xóa</a>
                     </td>
+
                 </tr>
 
+            }
+            @{
+                decimal totalall = 0;
+            }
+            @foreach (var item in Model.Items)
+            {
+                decimal total = item._quantity * (decimal)item._product.Price.Value * (decimal)item._product.giamgia.Value;
+                decimal total2 = item._quantity * (decimal)item._product.Price.Value - (decimal)total;
+                totalall = totalall + total2;
             }
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="6" style="text-align:right ">Tổng Tiền: @Model.Total_money().ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</td>
+                <td  colspan="6" style="text-align:right ">@totalall.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</td>
 
                 <td>
                     <div style="margin-top: 50px;">
@@ -68,3 +83,24 @@ else
     @Html.Partial("EmptyCart")
 }
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var priceElements = document.querySelectorAll(".price");
+
+        priceElements.forEach(function (element) {
+            var priceValue = element.textContent;
+            var formattedPrice = formatPrice(priceValue);
+            element.textContent = formattedPrice;
+        });
+
+        function formatPrice(price) {
+            // Chuyển đổi thành số nguyên
+            var integerPart = parseInt(price);
+            // Thêm dấu phẩy ngăn cách hàng ngàn
+            var formattedPrice = integerPart.toLocaleString("vi-VN");
+            // Thêm đơn vị tiền tệ
+            formattedPrice += " đ";
+            return formattedPrice;
+        }
+    });
+</script>

@@ -136,10 +136,10 @@
                 <ul class="nav navbar-nav">
                     @if (Session["ID"] == "admin")
                     {
-                        <li style=" margin-top: 15px; "><a style="padding: 0px 20px; color: black; text-decoration: none;" href="@Url.Action("Create","Product")">Thêm Sản Phẩm</a></li>
-                        <li style=" margin-top: 15px; "><a style="padding: 0px 20px; color: black; text-decoration: none;" href="@Url.Action("Index2","Product")">Chỉnh Sửa Sản Phẩm</a></li>
-                        <li style=" margin-top: 15px; "><a style="padding: 0px 20px; color: black; text-decoration: none;" href="@Url.Action("Index","Categories")">Chỉnh Sửa Danh Sách</a></li>
-                        <li style=" margin-top: 15px; "><a style="padding: 0px 20px; color: black; text-decoration: none;" href="@Url.Action("DanhsachDH","ShoppingCart")">Lịch Sử Đặt Hàng</a></li>
+                        <li style=" margin-top: 15px; "><a style="padding: 0px 5px; color: black; text-decoration: none;" href="@Url.Action("Create","Product")">Thêm Sản Phẩm</a></li>
+                        <li style=" margin-top: 15px; "><a style="padding: 0px 5px; color: black; text-decoration: none;" href="@Url.Action("Index2","Product")">Chỉnh Sửa Sản Phẩm</a></li>
+                        <li style=" margin-top: 15px; "><a style="padding: 0px 5px; color: black; text-decoration: none;" href="@Url.Action("Index","Categories")">Chỉnh Sửa Danh Sách</a></li>
+                        <li style=" margin-top: 15px; "><a style="padding: 0px 5px; color: black; text-decoration: none;" href="@Url.Action("DanhsachDH","ShoppingCart")">Lịch Sử Đặt Hàng</a></li>
 
                     }
                 </ul>
@@ -154,9 +154,9 @@
                             </span>
                             @Html.Action("BagCart", "ShoppingCart")
                         </li>
-                        <li class="navbar-item"><a href="/LoginUser/RegisterUser"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-                        <li class="navbar-item"><a href="/LoginUser/Index"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
-                        <li class="navbar-item"><a href="@Url.Action("LogOutUser","LoginUser")">LogOut</a> </li>
+                        <li class="navbar-item"><a href="/LoginUser/RegisterUser"><span ></span>Đăng Ký</a></li>
+                        <li class="navbar-item"><a href="/LoginUser/Index"><span ></span>Đăng Nhập</a></li>
+                        <li class="navbar-item"><a href="@Url.Action("LogOutUser","LoginUser")">Đăng Xuất</a> </li>
 
                     </ul>
                 </ul>

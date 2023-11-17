@@ -10,7 +10,7 @@ namespace DemoDB2_B04.Controllers
 {
     public class ProductController : Controller
     {
-        DBSportStoreEntities2 database = new DBSportStoreEntities2();
+        DBSportStoreEntities3 database = new DBSportStoreEntities3();
         // GET: Product
         public ActionResult Index(string name)// tiềm kiếm ngoc peo
         {
@@ -43,14 +43,16 @@ namespace DemoDB2_B04.Controllers
         {
             try
             {
-                if (pro.UploadImages != null)
+                if (pro.UploadImage != null)
                 {
-                    string filename = Path.GetFileNameWithoutExtension(pro.UploadImages.FileName);
-                    string extent = Path.GetExtension(pro.UploadImages.FileName);
+                    string filename = Path.GetFileNameWithoutExtension(pro.UploadImage.FileName);
+                    string extent = Path.GetExtension(pro.UploadImage.FileName);
                     filename = filename + extent;
                     pro.ImagePro = "~/Content/images/" + filename;
-                    pro.UploadImages.SaveAs(Path.Combine(Server.MapPath("~/Content/images/"), filename));
+                    pro.UploadImage.SaveAs(Path.Combine(Server.MapPath("~/Content/images/"), filename));
+
                 }
+                pro.giamgia = 0;
                 database.Products.Add(pro);
                 database.SaveChanges();
                 return RedirectToAction("Index");
@@ -59,6 +61,7 @@ namespace DemoDB2_B04.Controllers
             {
                 return View();
             }
+
         }
         public ActionResult Delete(int id)
         {
@@ -81,22 +84,25 @@ namespace DemoDB2_B04.Controllers
         }
         public ActionResult Edit(int id)
         {
-            return View(database.Products.Where(s => s.ProductID == id).FirstOrDefault());
+            return View(database.Products.Where(s => s.ProductID > id).FirstOrDefault());
         }
         [HttpPost]
-        public ActionResult Edit(int id, Product cate)
+        public ActionResult Edit(Product product)
         {
-            if (database.Products.Any(s => s.ProductID == id))
-            {
-                database.Entry(cate).State = System.Data.Entity.EntityState.Modified;
-                database.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                // Xử lý khi không tìm thấy sản phẩm
-                return RedirectToAction("NotFound");
-            }
+            database.Entry(product).State = System.Data.Entity.EntityState.Modified;
+            database.SaveChanges();
+            return RedirectToAction("Index2");
+        }
+        public ActionResult giamgia(int id)
+        {
+            return View(database.Products.Where(s => s.ProductID > id).FirstOrDefault());
+        }
+        [HttpPost]
+        public ActionResult giamgia(Product product)
+        {
+            database.Entry(product).State = System.Data.Entity.EntityState.Modified;
+            database.SaveChanges();
+            return RedirectToAction("Index2");
         }
         //public ActionResult Edit(int id, Category cate)
         //{

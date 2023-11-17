@@ -5,49 +5,71 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Admin</h2>
+<h2>Danh Sách </h2>
 
 
 <table class="table" style="margin-bottom: 290px;">
-    <tr>
+    <tr style="background-color: dodgerblue;
+    color: white; " ">
         <th>
-            @Html.DisplayNameFor(model => model.NamePro)
+            @Html.DisplayName("Tên sản phẩm")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DecriptionPro)
+            @Html.DisplayName("Số lượng trong kho")
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.Category)
-        </th>*@
+                @Html.DisplayNameFor(model => model.Category)
+            </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayName("Giá")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ImagePro)
+            @Html.DisplayName("Hình ảnh")
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NamePro)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DecriptionPro)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NamePro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DecriptionPro)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>*@
+            <td class="price">
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
 
-        <td>
-            <img src="@Url.Content(item.ImagePro)" height="150" width="150" style="border-radius: 16px; width: 200px;" />
-        </td>
+            <td>
+                <img src="@Url.Content(item.ImagePro)" height="150" width="150" style="border-radius: 16px; width: 200px;" />
+            </td>
 
-    </tr>
-}
+        </tr>
+    }
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var priceElements = document.querySelectorAll(".price");
 
+            priceElements.forEach(function (element) {
+                var priceValue = element.textContent;
+                var formattedPrice = formatPrice(priceValue);
+                element.textContent = formattedPrice;
+            });
+
+            function formatPrice(price) {
+                // Chuyển đổi thành số nguyên
+                var integerPart = parseInt(price);
+                // Thêm dấu phẩy ngăn cách hàng ngàn
+                var formattedPrice = integerPart.toLocaleString("vi-VN");
+                // Thêm đơn vị tiền tệ
+                formattedPrice += " đ";
+                return formattedPrice;
+            }
+        });
+    </script>
 </table>

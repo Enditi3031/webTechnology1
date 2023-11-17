@@ -39,11 +39,32 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
-            <td>
+            <td class="price">
                 @Html.DisplayFor(modelItem => item.UnitPrice)
             </td>
         </tr>
         </tr>
     }
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var priceElements = document.querySelectorAll(".price");
+
+            priceElements.forEach(function (element) {
+                var priceValue = element.textContent;
+                var formattedPrice = formatPrice(priceValue);
+                element.textContent = formattedPrice;
+            });
+
+            function formatPrice(price) {
+                // Chuyển đổi thành số nguyên
+                var integerPart = parseInt(price);
+                // Thêm dấu phẩy ngăn cách hàng ngàn
+                var formattedPrice = integerPart.toLocaleString("vi-VN");
+                // Thêm đơn vị tiền tệ
+                formattedPrice += " đ";
+                return formattedPrice;
+            }
+        });
+    </script>
 
 </table>

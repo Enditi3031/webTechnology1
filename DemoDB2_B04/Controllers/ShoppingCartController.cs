@@ -9,7 +9,7 @@ namespace DemoDB2_B04.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        DBSportStoreEntities2 database = new DBSportStoreEntities2();
+        DBSportStoreEntities3 database = new DBSportStoreEntities3();
         // GET: ShoppingCart
         public ActionResult Index()
         {
@@ -122,8 +122,13 @@ namespace DemoDB2_B04.Controllers
         }
         public ActionResult DatHang()//loc
         {
+            if (Session["ID"] == null)
+            {
+                return RedirectToAction("Index", "LoginUser");
+            }
             int id = int.Parse(Session["ID"].ToString()); // Gán giá trị mặc định, hoặc giá trị mong muốn nếu Session không tồn tại
             var pro = database.AdminUsers.SingleOrDefault(s => s.ID == id);//lấy ra người dùng có id vừa đặng nhập vào
+             
             Cart cart = Session["Cart"] as Cart;
             OrderPro order = new OrderPro();
             order.DateOrder = DateTime.Now.Date;
@@ -142,10 +147,17 @@ namespace DemoDB2_B04.Controllers
                 detail.Price = item._product.Price;
                 detail.NamePro = item._product.NamePro;
                 database.OrderDetails.Add(detail);
+                foreach (var p in database.Products.Where(s => s.ProductID == detail.IDProduct)) //lấy ID Product đang có trong giỏ hàng
+                {
+                    var update_quan_pro = p.Quantity - item._quantity; //số lượng tồn mới = số lượng tồn - số lượng đã mua
+                    p.Quantity = update_quan_pro; //thực hiện cập nhật lại số lượng tồn cho cột Quantity của bảng Product
+                }
+
                 database.SaveChanges();
             }
             cart.ClearCart();
-            return RedirectToAction("Index", "Product");
+            return RedirectToAction("chitiet", "ShoppingCart", new { id = order.ID });
         }
+        
     }
 }

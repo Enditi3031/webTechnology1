@@ -14,8 +14,8 @@
             @Html.DisplayName("Tên sản phẩm")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DecriptionPro)
-        <th>
+            @Html.DisplayName("Số lượng trong kho")
+<th>
             @Html.DisplayName("Giá")
         </th>
         <th>
@@ -39,9 +39,10 @@
             <img src="@Url.Content(item.ImagePro)" height="150" width="150" style="border-radius: 16px; width: 200px;" />
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }) |
-           
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+
+            @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+            @Html.ActionLink("Thêm Giảm Giá", "giamgia", new { id = item.ProductID })
         </td>
     </tr>
 }

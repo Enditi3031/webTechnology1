@@ -47,9 +47,27 @@ namespace DemoDB2_B04.Models
             var item = items.Find(s => s._product.ProductID == id);
             if (item != null)
             {
-                item._quantity = _new_quan;
-            }
-        }
+                // Chuyển đổi giá trị chuỗi DecriptionPro thành số nguyên
+                if (int.TryParse(item._product.DecriptionPro, out int descriptionValue))
+                {
+                    if (descriptionValue > _new_quan)
+                    {
+                        item._quantity = _new_quan;
+                        descriptionValue = descriptionValue - _new_quan;
+                        item._product.DecriptionPro = descriptionValue.ToString();
+                    }
+                    else
+                    {
+                        item._quantity = 1;
+                    }
+                }
+                else
+                {
+                    // Xử lý lỗi chuyển đổi
+                    Console.WriteLine("Không thể chuyển đổi giá trị DescriptionPro thành số nguyên.");
+                    // Bạn có thể thực hiện xử lý khác tùy thuộc vào yêu cầu của bạn
+                }
+            }}
         //hàm xóa sản phẩm trong giỏ hàng
         public void Remove_CartItem(int id)
         {

@@ -29,5 +29,6 @@ namespace DemoDB2_B04.Models
         public virtual ICollection<Product> Products { get; set; }
         [NotMapped]
         public List<Category> ListCate { get; set; }
+
     }
 }

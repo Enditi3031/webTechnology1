@@ -63,6 +63,8 @@
           <Property Name="Category" Type="nchar" MaxLength="20" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
           <Property Name="ImagePro" Type="nvarchar(max)" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="giamgia" Type="float" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -198,6 +200,8 @@
           <Property Name="Category" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="ImagePro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="giamgia" Type="Double" />
           <NavigationProperty Name="Category1" Relationship="Self.FK_Pro_Category" FromRole="Products" ToRole="Category" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__IDPro__1BFD2C07" FromRole="Products" ToRole="OrderDetail" />
         </EntityType>
@@ -247,7 +251,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DBSportStoreEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DBSportStoreEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AdminUsers" EntityType="Self.AdminUser" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
@@ -273,7 +277,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DBSportStoreModelStoreContainer" CdmEntityContainer="DBSportStoreEntities2">
+        <EntityContainerMapping StorageEntityContainer="DBSportStoreModelStoreContainer" CdmEntityContainer="DBSportStoreEntities3">
           <EntitySetMapping Name="AdminUsers">
             <EntityTypeMapping TypeName="DBSportStoreModel.AdminUser">
               <MappingFragment StoreEntitySet="AdminUser">
@@ -336,6 +340,8 @@
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="ImagePro" ColumnName="ImagePro" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="giamgia" ColumnName="giamgia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
